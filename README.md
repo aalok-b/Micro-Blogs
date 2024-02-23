@@ -3,11 +3,11 @@
 This is just simple apps for MicroService learning Project.
 Frontend with ReactJS & Backend with NodeJS.
 
-./client for Frontend with ReactJS || Running on Port 3000
-./comments for Comments Backend with NodeJS || Running on Port 4001
-./posts for Posts Backend with NodeJS || Running on Port 4000
-./event-bus for Event-Bus Services || Running on Port 4005
-./query for Data Query Services || Running on Port 4002
+- ./client for Frontend with ReactJS || Running on Port 3000
+- ./comments for Comments Backend with NodeJS || Running on Port 4001
+- ./posts for Posts Backend with NodeJS || Running on Port 4000
+- ./event-bus for Event-Bus Services || Running on Port 4005
+- ./query for Data Query Services || Running on Port 4002
 
 For K8s Cluster, there are added feature called "Moderation" it's running on Port 4003 [./moderation]
 Moderation is filter service, word "hate" will be rejected if you use a Moderation service.
