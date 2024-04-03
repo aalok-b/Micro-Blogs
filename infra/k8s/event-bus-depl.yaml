@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-depl
+spec:
+  replicas: 1 # required no. of podsfor a partivular image
+  selector:
+    matchLabels:
+      app: event-bus # tell deployment to find pod with these lables and manage them only
+  template: # configurations for the pod
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: ronin211/event-bus  # auto specify to latest version
+##creaeting cluster ip service for event-bus
+##creaeting cluster ip service for event-bus
+#use --- to separate different objects
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec:
+  selector:
+    app: event-bus
+  type: ClusterIP
+  ports:
+    - name: event-bus
+      protocol: TCP
+      port: 4005
+      targetPort: 4005
+      

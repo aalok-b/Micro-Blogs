@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+  type: NodePort        # expose the service to outside world (browser) * used in dev env only* use lodeBalancer in prod
+  selector:             # tells which pods to expost to outside browser
+    app: posts
+  ports:                # port to expose to outside world
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+      

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-depl
+spec:
+  replicas: 1 # required no. of podsfor a partivular image
+  selector:
+    matchLabels:
+      app: query # tell deployment to find pod with these lables and manage them only
+  template: # configurations for the pod
+    metadata:
+      labels:
+        app: query
+    spec:
+      containers:
+        - name: query
+          image: ronin211/query # auto specify to latest version
+##creaeting cluster ip service for event-bus
+##creaeting cluster ip service for event-bus
+#use --- to separate different objects
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: query-srv
+spec:
+  selector:
+    app: query
+  type: ClusterIP
+  ports:
+    - name: query
+      protocol: TCP
+      port: 4002
+      targetPort: 4002
+      

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1 # required no. of podsfor a partivular image
+  selector:
+    matchLabels:
+      app: moderation # tell deployment to find pod with these lables and manage them only
+  template: # configurations for the pod
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: ronin211/moderation  # auto specify to latest version
+##creaeting cluster ip service for moderation
+##creaeting cluster ip service for moderation
+#use --- to separate different objects
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-srv
+spec:
+  selector:
+    app: moderation
+  type: ClusterIP
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003
+      targetPort: 4003
+      

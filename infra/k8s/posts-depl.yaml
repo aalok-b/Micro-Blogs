@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1 # required no. of podsfor a partivular image
+  selector:
+    matchLabels:
+      app: posts # tell deployment to find pod with these lables and manage them only
+  template: # configurations for the pod
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: ronin211/posts
+##creaeting cluster ip service for event-bus
+##creaeting cluster ip service for event-bus
+#use --- to separate different objects
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-clusterip-srv
+spec:
+  selector:
+    app: posts
+  type: ClusterIP
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

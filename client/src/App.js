@@ -6,7 +6,7 @@ const App = () =>{
     return (
         <>
             <div className='container'>
-                <h1>BLOG APP</h1>
+                <h1>BLOG APP !! </h1>
                 <PostCreate />
             </div>
             <hr />

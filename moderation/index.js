@@ -5,30 +5,26 @@ const axios = require('axios');
 const app = express();
 app.use(bodyParser.json());
 
-app.post('/events',async (req,res) => {
+app.post('/events', async (req, res) => {
+  const { type, data } = req.body;
 
-    const {type, data} = req.body;
+  if (type === 'CommentCreated') {
+    const status = data.content.includes('hate') ? 'rejected' : 'approved';
 
-    if(type === 'commentCreated'){
+    await axios.post('http://event-bus-srv:4005/events', {
+      type: 'CommentModerated',
+      data: {
+        id: data.id,
+        postId: data.postId,
+        status,
+        content: data.content
+      }
+    });
+  }
 
-        console.log('comment recievd');
-        const flag = data.content.includes('hate')? 'rejected' : 'approved';
-        console.log('comment filtered');
-
-        await axios.post('http://localhost:4005/events',{
-            type: 'commentModerated',
-            data: {
-                id : data.id,
-                postId: data.postId,
-                flag,
-                content: data.content
-            }
-        });
-    }
-
-    res.send({status:'OK'});
+  res.send({});
 });
 
 app.listen(4003, () => {
-    console.log("moderation service online at port 4003");
+  console.log('Listening on 4003');
 });

@@ -1,0 +1,8 @@
+apiVersion: v1         
+kind: Pod             #type of object we want to create
+metadata:             #configuration for the object
+  name: posts         #name of the object
+spec:                 #list of configutations for the object
+  containers:         #array of containers that will run in the pod
+    - name: posts     #name of the container ## - is used to define start of an array element
+      image: ronin211/posts:0.0.1  #image to use for the container

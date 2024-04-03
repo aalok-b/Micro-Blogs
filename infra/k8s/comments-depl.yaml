@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-depl
+spec:
+  replicas: 1 # required no. of podsfor a partivular image
+  selector:
+    matchLabels:
+      app: comments # tell deployment to find pod with these lables and manage them only
+  template: # configurations for the pod
+    metadata:
+      labels:
+        app: comments
+    spec:
+      containers:
+        - name: comments
+          image: ronin211/comments  # auto specify to latest version
+##creaeting cluster ip service for comments
+##creaeting cluster ip service for comments
+#use --- to separate different objects
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-srv
+spec:
+  selector:
+    app: comments
+  type: ClusterIP
+  ports:
+    - name: comments
+      protocol: TCP
+      port: 4001
+      targetPort: 4001
+      
