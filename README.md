@@ -31,3 +31,9 @@ $ npm run build
 
 All directories have been given Dockerfile, please build a new image.
 $ docker build .
+
+Additionally, Skaffold can be used for deployment, streamlining Kubernetes development by automating container builds, deployments, and providing a consistent local development environment.
+
+$ skaffold dev
+
+
